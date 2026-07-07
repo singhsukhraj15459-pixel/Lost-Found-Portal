@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+{% block title %}Home | Lost & Found Portal{% endblock %}
+{% block content %}
+<div class="p-5 bg-light rounded-3 text-center">
+    <h1>Lost Something? Found Something?</h1>
+    <p class="lead">Help your community reconnect people with their belongings.</p>
+    <a href="{% url 'register' %}" class="btn btn-primary me-2">Report Lost Item</a>
+    <a href="{% url 'register' %}" class="btn btn-success">Report Found Item</a>
+</div>
+{% endblock %}
