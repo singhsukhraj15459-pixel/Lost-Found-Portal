@@ -56,3 +56,33 @@ def logout_view(request):
 @login_required
 def dashboard_view(request):
     return render(request, 'core/dashboard.html')
+from .forms import UserRegisterForm, UserLoginForm, LostItemForm, FoundItemForm
+from core.patterns.factories import ItemReportFactory
+
+
+@login_required
+def report_lost_view(request):
+    if request.method == 'POST':
+        form = LostItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            item = ItemReportFactory.create_report('lost', request.user, form)
+            messages.success(request, "Lost item reported successfully.")
+            return redirect('dashboard')
+    else:
+        form = LostItemForm()
+
+    return render(request, 'core/report_lost.html', {'form': form})
+
+
+@login_required
+def report_found_view(request):
+    if request.method == 'POST':
+        form = FoundItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            item = ItemReportFactory.create_report('found', request.user, form)
+            messages.success(request, "Found item reported successfully.")
+            return redirect('dashboard')
+    else:
+        form = FoundItemForm()
+
+    return render(request, 'core/report_found.html', {'form': form})

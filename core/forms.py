@@ -39,3 +39,24 @@ class UserRegisterForm(UserCreationForm):
 class UserLoginForm(forms.Form):
     email = forms.EmailField(label="Email Address")
     password = forms.CharField(widget=forms.PasswordInput)
+from .models import LostItem, FoundItem
+
+
+class LostItemForm(forms.ModelForm):
+    class Meta:
+        model = LostItem
+        fields = ['title', 'category', 'description', 'date_lost', 'area', 'postcode', 'image']
+        widgets = {
+            'date_lost': forms.DateInput(attrs={'type': 'date'}),
+            'description': forms.Textarea(attrs={'rows': 4}),
+        }
+
+
+class FoundItemForm(forms.ModelForm):
+    class Meta:
+        model = FoundItem
+        fields = ['title', 'category', 'description', 'date_found', 'area', 'postcode', 'image']
+        widgets = {
+            'date_found': forms.DateInput(attrs={'type': 'date'}),
+            'description': forms.Textarea(attrs={'rows': 4}),
+        }

@@ -4,8 +4,8 @@
 <h2>Welcome, {{ user.first_name }}</h2>
 <p>Email: {{ user.email }}</p>
 <div class="row mt-4">
-    <div class="col-md-3"><a href="#" class="btn btn-outline-primary w-100 mb-2">My Lost Reports</a></div>
-    <div class="col-md-3"><a href="#" class="btn btn-outline-success w-100 mb-2">My Found Reports</a></div>
+    <div class="col-md-3"><a href="{% url 'report_lost' %}" class="btn btn-outline-primary w-100 mb-2">My Lost Reports</a></div>
+<div class="col-md-3"><a href="{% url 'report_found' %}" class="btn btn-outline-success w-100 mb-2">My Found Reports</a></div>
     <div class="col-md-3"><a href="#" class="btn btn-outline-secondary w-100 mb-2">Messages</a></div>
     <div class="col-md-3"><a href="#" class="btn btn-outline-info w-100 mb-2">Profile</a></div>
 </div>
