@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% block title %}Browse Found Items | Lost & Found Portal{% endblock %}
+{% block content %}
+<h2 class="mb-4">Browse Found Items</h2>
+
+<form method="GET" class="row g-2 mb-4">
+    <div class="col-md-3">
+        <input type="text" name="keyword" value="{{ keyword }}" class="form-control" placeholder="Keyword (e.g. wallet)">
+    </div>
+    <div class="col-md-3">
+        <select name="category" class="form-select">
+            <option value="">All Categories</option>
+            {% for cat in categories %}
+                <option value="{{ cat.id }}" {% if selected_category == cat.id|stringformat:"s" %}selected{% endif %}>
+                    {{ cat.category_name }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-3">
+        <input type="text" name="area" value="{{ area }}" class="form-control" placeholder="Area (e.g. Barking)">
+    </div>
+    <div class="col-md-2">
+        <select name="status" class="form-select">
+            <option value="">Any Status</option>
+            <option value="waiting" {% if status == 'waiting' %}selected{% endif %}>Waiting for Owner</option>
+            <option value="recovered" {% if status == 'recovered' %}selected{% endif %}>Recovered</option>
+        </select>
+    </div>
+    <div class="col-md-1">
+        <button type="submit" class="btn btn-primary w-100">Go</button>
+    </div>
+</form>
+
+<div class="row">
+    {% for item in items %}
+        <div class="col-md-4 mb-4">
+            <div class="card card-item h-100">
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" style="height:180px;object-fit:cover;border-radius:12px 12px 0 0;">
+                {% else %}
+                    <div class="img-placeholder"><i class="bi bi-image"></i></div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'found_item_detail' item.id %}">{{ item.title }}</a></h5>
+                    <p class="card-text">
+                        <span class="badge badge-meta">{{ item.category.category_name }}</span>
+                        <span class="badge badge-meta"><i class="bi bi-geo-alt"></i> {{ item.area }}</span>
+                        <span class="badge {% if item.status == 'recovered' %}badge-recovered{% else %}badge-waiting{% endif %}">
+                            {{ item.get_status_display }}
+                        </span>
+                    </p>
+                    <p class="text-muted small mb-0">Found on {{ item.date_found }}</p>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No found items match your search.</p>
+    {% endfor %}
+</div>
+{% endblock %}

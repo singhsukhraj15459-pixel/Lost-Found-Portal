@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
+from .models import Message
 
 
 class UserRegisterForm(UserCreationForm):
@@ -60,3 +61,33 @@ class FoundItemForm(forms.ModelForm):
             'date_found': forms.DateInput(attrs={'type': 'date'}),
             'description': forms.Textarea(attrs={'rows': 4}),
         }
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['message']
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Type your message...'}),
+        }
+        labels = {
+            'message': ''
+        }
+class ProfileUpdateForm(forms.ModelForm):
+    full_name = forms.CharField(max_length=150, label="Full Name")
+
+    class Meta:
+        model = User
+        fields = ['full_name', 'mobile_number', 'profile_photo']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance:
+            self.fields['full_name'].initial = f"{self.instance.first_name} {self.instance.last_name}".strip()
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        name_parts = self.cleaned_data['full_name'].strip().split(' ', 1)
+        user.first_name = name_parts[0]
+        user.last_name = name_parts[1] if len(name_parts) > 1 else ''
+        if commit:
+            user.save()
+        return user

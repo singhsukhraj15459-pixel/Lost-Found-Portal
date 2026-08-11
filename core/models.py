@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 from django.db import models
@@ -40,7 +41,11 @@ class LostItem(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     area = models.CharField(max_length=100)
     postcode = models.CharField(max_length=20, blank=True, null=True)
-    image = models.ImageField(upload_to='lost_items/', blank=True, null=True)
+    image = models.ImageField(
+    upload_to='lost_items/',
+    blank=True,
+    null=True,
+    validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])])
     date_lost = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='searching')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -61,7 +66,12 @@ class FoundItem(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     area = models.CharField(max_length=100)
     postcode = models.CharField(max_length=20, blank=True, null=True)
-    image = models.ImageField(upload_to='found_items/', blank=True, null=True)
+    image = models.ImageField(
+    upload_to='lost_items/',
+    blank=True,
+    null=True,
+    validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])]
+    )
     date_found = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='waiting')
     created_at = models.DateTimeField(auto_now_add=True)

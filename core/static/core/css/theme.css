@@ -1,0 +1,291 @@
+:root {
+  --teal-900: #04342C;
+  --teal-800: #085041;
+  --teal-700: #0C5C48;
+  --teal-600: #0F6E56;
+  --teal-400: #1D9E75;
+  --teal-200: #5DCAA5;
+  --teal-100: #9FE1CB;
+  --teal-50:  #E1F5EE;
+  --amber-100:#FAEEDA;
+  --amber-800:#412402;
+  --ink: #1A1F1D;
+}
+
+body {
+  font-family: 'Manrope', -apple-system, sans-serif;
+  background-color: #FAFBFA;
+  color: var(--ink);
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+}
+
+/* Navbar */
+.navbar.bg-dark {
+  background-color: var(--teal-900) !important;
+}
+.navbar .nav-link {
+  color: var(--teal-100) !important;
+}
+.navbar .nav-link:hover {
+  color: #fff !important;
+}
+.navbar-brand {
+  color: #fff !important;
+}
+
+/* Buttons */
+.btn-primary, .bg-primary {
+  background-color: var(--teal-600) !important;
+  border-color: var(--teal-600) !important;
+}
+.btn-primary:hover {
+  background-color: var(--teal-700) !important;
+  border-color: var(--teal-700) !important;
+}
+.btn-outline-primary {
+  color: var(--teal-600) !important;
+  border-color: var(--teal-600) !important;
+}
+.btn-outline-primary:hover {
+  background-color: var(--teal-600) !important;
+  color: #fff !important;
+}
+.btn-success {
+  background-color: var(--teal-400) !important;
+  border-color: var(--teal-400) !important;
+}
+.btn-outline-success {
+  color: var(--teal-400) !important;
+  border-color: var(--teal-400) !important;
+}
+.btn-outline-success:hover {
+  background-color: var(--teal-400) !important;
+  color: #fff !important;
+}
+.text-primary { color: var(--teal-600) !important; }
+
+/* Hero */
+.hero-section {
+  background: linear-gradient(135deg, var(--teal-50), #fff);
+  border-radius: 16px;
+  padding: 64px 32px;
+  text-align: center;
+}
+.hero-section h1 {
+  color: var(--teal-900);
+  font-size: 2.5rem;
+}
+
+/* Cards */
+.card {
+  border: 1px solid #E5E9E7;
+  border-radius: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(4, 52, 44, 0.10);
+}
+.card-title a {
+  color: var(--teal-900);
+  text-decoration: none;
+  font-weight: 600;
+}
+.card-title a:hover {
+  color: var(--teal-600);
+}
+
+/* Status badges */
+.badge-searching, .badge-waiting {
+  background-color: var(--amber-100) !important;
+  color: var(--amber-800) !important;
+}
+.badge-recovered {
+  background-color: var(--teal-50) !important;
+  color: var(--teal-800) !important;
+}
+.badge-meta {
+  background-color: #F1F3F2 !important;
+  color: #4A524F !important;
+}
+
+/* Match highlight box */
+.match-highlight {
+  background-color: var(--teal-50);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+/* Forms */
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1px solid #DADFDC;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--teal-400);
+  box-shadow: 0 0 0 0.2rem rgba(29, 158, 117, 0.15);
+}
+
+/* Auth cards */
+.auth-card {
+  border-radius: 14px;
+  border: 1px solid #E5E9E7;
+  padding: 28px;
+  background: #fff;
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--teal-900);
+  color: var(--teal-100);
+  padding: 32px 0;
+  margin-top: 64px;
+}
+.site-footer a {
+  color: var(--teal-100);
+  text-decoration: none;
+}
+.site-footer a:hover {
+  color: #fff;
+}
+
+/* Image placeholder */
+.img-placeholder {
+  height: 180px;
+  background: var(--teal-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal-200);
+  font-size: 2.5rem;
+  border-radius: 12px 12px 0 0;
+}
+/* Navbar Option B */
+.navbar-centered {
+  background-color: var(--teal-900) !important;
+  padding: 12px 0;
+}
+.navbar-centered .navbar-brand {
+  font-weight: 700;
+  color: #fff !important;
+}
+.navbar-centered .nav-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.navbar-centered .nav-link {
+  color: var(--teal-100) !important;
+  font-size: 14px;
+  padding-bottom: 4px !important;
+  border-bottom: 2px solid transparent;
+}
+.navbar-centered .nav-link:hover {
+  color: #fff !important;
+}
+.navbar-centered .nav-link.active {
+  color: #fff !important;
+  border-bottom: 2px solid var(--teal-400);
+  font-weight: 600;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.user-chip:hover {
+  background: rgba(255,255,255,0.08);
+}
+.user-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--teal-200);
+  color: var(--teal-900);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.user-chip span {
+  color: var(--teal-50);
+  font-size: 13px;
+}
+.user-chip .bi-chevron-down {
+  color: var(--teal-200);
+  font-size: 10px;
+}
+/* Register split-panel card */
+.auth-split-wrapper {
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(4, 52, 44, 0.12);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.auth-split-brand {
+  flex: 0 0 38%;
+  background: linear-gradient(160deg, var(--teal-600), var(--teal-900));
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+}
+.auth-split-brand .brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--teal-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--teal-900);
+  margin-bottom: 16px;
+}
+.auth-split-brand h4 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.auth-split-brand p {
+  color: var(--teal-100);
+  font-size: 0.85rem;
+  margin: 0;
+}
+.auth-split-brand .privacy-note {
+  color: var(--teal-200);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.auth-split-form {
+  flex: 1;
+  background: #fff;
+  padding: 36px 32px;
+}
+
+@media (max-width: 767px) {
+  .auth-split-wrapper {
+    flex-direction: column;
+  }
+  .auth-split-brand {
+    flex: none;
+    padding: 24px;
+  }
+}

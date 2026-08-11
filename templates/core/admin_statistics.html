@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% block title %}Site Statistics | Lost & Found Portal{% endblock %}
+{% block content %}
+<h2 class="mb-4">Site Statistics</h2>
+
+<div class="row g-3">
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h6>Total Users</h6>
+            <p class="display-6">{{ stats.total_users }}</p>
+            <small class="text-muted">{{ stats.active_users }} active / {{ stats.suspended_users }} suspended</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h6>Lost Reports</h6>
+            <p class="display-6">{{ stats.total_lost }}</p>
+            <small class="text-muted">{{ stats.lost_searching }} searching / {{ stats.lost_recovered }} recovered</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h6>Found Reports</h6>
+            <p class="display-6">{{ stats.total_found }}</p>
+            <small class="text-muted">{{ stats.found_waiting }} waiting / {{ stats.found_recovered }} recovered</small>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h6>Matches Found</h6>
+            <p class="display-6">{{ stats.total_matches }}</p>
+            <small class="text-muted">{{ stats.total_messages }} messages sent</small>
+        </div>
+    </div>
+</div>
+
+<a href="/admin/" class="btn btn-outline-dark mt-4">Go to Full Admin Panel</a>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% block title %}Conversation | Lost & Found Portal{% endblock %}
+{% block content %}
+<a href="{% url 'inbox' %}" class="btn btn-sm btn-outline-secondary mb-3">&larr; Back to Messages</a>
+<h4 class="mb-4">Conversation with {{ other_user.first_name }} {{ other_user.last_name }}</h4>
+
+<div class="border rounded p-3 mb-3" style="max-height: 400px; overflow-y: auto;">
+    {% for msg in thread %}
+        <div class="mb-2 {% if msg.sender == user %}text-end{% endif %}">
+            <span class="badge {% if msg.sender == user %}bg-primary{% else %}bg-secondary{% endif %} p-2">
+                {{ msg.message }}
+            </span>
+            <div class="text-muted small">{{ msg.timestamp|date:"d M Y, H:i" }}</div>
+        </div>
+    {% empty %}
+        <p class="text-muted">No messages yet. Say hello!</p>
+    {% endfor %}
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="input-group">
+        {{ form.message }}
+        <button type="submit" class="btn btn-primary">Send</button>
+    </div>
+</form>
+{% endblock %}

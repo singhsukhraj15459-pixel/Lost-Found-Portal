@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% block title %}My Lost Reports | Lost & Found Portal{% endblock %}
+{% block content %}
+<h2 class="mb-4">My Lost Reports</h2>
+<div class="row">
+    {% for item in items %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if item.image %}<img src="{{ item.image.url }}" class="card-img-top" style="height:160px;object-fit:cover;">{% endif %}
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'lost_item_detail' item.id %}">{{ item.title }}</a></h5>
+                    <span class="badge {% if item.status == 'recovered' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                        {{ item.get_status_display }}
+                    </span>
+                    {% if item.status != 'recovered' %}
+                        <a href="{% url 'mark_lost_recovered' item.id %}" class="btn btn-sm btn-outline-success mt-2">Mark as Recovered</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>You haven't reported any lost items yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
