@@ -3,8 +3,7 @@ Factory Method Pattern
 -----------------------
 Centralizes the creation of LostItem and FoundItem records so that
 views don't need to know the differing defaults (status values) or
-duplicate creation logic. If a new report type were ever added
-(e.g. "Handed to Police"), only this factory needs to change.
+duplicate creation logic.
 """
 from core.models import LostItem, FoundItem
 

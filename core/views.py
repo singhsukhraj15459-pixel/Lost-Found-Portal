@@ -152,21 +152,17 @@ def browse_found_view(request):
     })
 def lost_item_detail_view(request, item_id):
     item = get_object_or_404(LostItem, id=item_id)
-    matches = CategoryAreaKeywordStrategy().find_matches(item)
     return render(request, 'core/item_detail.html', {
         'item': item,
         'item_kind': 'Lost',
-        'matches': matches,
     })
 
 
 def found_item_detail_view(request, item_id):
     item = get_object_or_404(FoundItem, id=item_id)
-    matches = CategoryAreaKeywordStrategy().find_matches(item)
     return render(request, 'core/item_detail.html', {
         'item': item,
         'item_kind': 'Found',
-        'matches': matches,
     })
 @login_required
 def inbox_view(request):
@@ -235,6 +231,7 @@ def start_conversation_view(request, item_type, item_id):
         return redirect('dashboard')
 
     return redirect('conversation', user_id=item.user.id)
+
 @login_required
 def dashboard_view(request):
     my_lost = LostItemRepository.get_by_user(request.user)
@@ -243,9 +240,28 @@ def dashboard_view(request):
     recovered_lost = my_lost.filter(status='recovered')
     recovered_found = my_found.filter(status='recovered')
 
-    my_matches = MatchNotification.objects.filter(
+    match_notifications = MatchNotification.objects.filter(
         Q(lost_item__user=request.user) | Q(found_item__user=request.user)
+    ).select_related(
+        'lost_item', 'found_item', 'lost_item__category', 'found_item__category'
     ).order_by('-created_at')[:5]
+
+    my_matches = []
+    for match in match_notifications:
+        if match.lost_item.user == request.user:
+            my_matches.append({
+                'my_item': match.lost_item,
+                'my_item_type': 'lost',
+                'other_item': match.found_item,
+                'other_item_type': 'found',
+            })
+        else:
+            my_matches.append({
+                'my_item': match.found_item,
+                'my_item_type': 'found',
+                'other_item': match.lost_item,
+                'other_item_type': 'lost',
+            })
 
     return render(request, 'core/dashboard.html', {
         'my_lost': my_lost,

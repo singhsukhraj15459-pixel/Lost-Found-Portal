@@ -9,12 +9,10 @@ the matching logic itself.
 from abc import ABC, abstractmethod
 from core.models import MatchNotification, LostItem, FoundItem
 
-
 class MatchObserver(ABC):
     @abstractmethod
     def update(self, lost_item, found_item):
         pass
-
 
 class NotificationObserver(MatchObserver):
     def update(self, lost_item, found_item):
@@ -23,10 +21,7 @@ class NotificationObserver(MatchObserver):
             found_item=found_item,
         )
 
-
 class MatchSubject:
-    """Holds observers and notifies them all when a match occurs."""
-
     def __init__(self):
         self._observers = []
 
